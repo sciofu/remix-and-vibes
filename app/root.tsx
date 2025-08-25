@@ -33,7 +33,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <header className="fixed top-0 inset-x-0 border-b border-gray-200 bg-white/80 backdrop-blur dark:bg-gray-950/70 dark:border-gray-800">
+          <nav className="container mx-auto flex items-center justify-between p-4">
+            <a href="/" className="font-semibold">Remix Concepts Showcase</a>
+            <ul className="flex items-center gap-4 text-sm">
+              <li><a className="hover:underline" href="/">Home</a></li>
+              <li><a className="hover:underline" href="/posts">Posts (Loaders)</a></li>
+              <li><a className="hover:underline" href="/posts/new">New Post (Action)</a></li>
+            </ul>
+          </nav>
+        </header>
+        <div className="pt-16">{children}</div>
         <ScrollRestoration />
         <Scripts />
       </body>
