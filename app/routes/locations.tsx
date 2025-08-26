@@ -29,43 +29,27 @@ export const View = () => {
   };
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <aside
-        style={{
-          width: 300,
-          borderRight: "1px solid #ccc",
-          padding: 16,
-          height: "100vh",
-          boxSizing: "border-box",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <h2>Locations</h2>
-        <ul
-          style={{
-            listStyle: "none",
-            padding: 0,
-            flex: 1,
-            overflowY: "auto",
-            margin: 0,
-          }}
-        >
+    <div className="flex h-[95.5vh]">
+      <aside className="w-[300px] border-r border-gray-300 p-4 box-border flex flex-col">
+        <h2 className="text-lg font-bold mb-4">Locations</h2>
+        <ul className="list-none p-0 flex-1 overflow-y-auto m-0">
           {locations.map((loc) => (
-            <li key={loc.id} style={{ marginBottom: 8 }}>
-              <Link to={String(loc.id)}>{loc.name}</Link>
+            <li key={loc.id} className="mb-2">
+              <Link to={String(loc.id)} className="hover:text-blue-600">
+                {loc.name}
+              </Link>
             </li>
           ))}
         </ul>
         <button
           onClick={loadMore}
           disabled={fetcher.state === "loading"}
-          style={{ marginTop: 16, width: "100%" }}
+          className="mt-4 w-full py-2 bg-blue-500 text-white rounded disabled:bg-gray-400"
         >
           {fetcher.state === "loading" ? "Loading..." : "Load More"}
         </button>
       </aside>
-      <main style={{ flex: 1, padding: 16 }}>
+      <main className="flex-1 p-4">
         <Outlet />
       </main>
     </div>

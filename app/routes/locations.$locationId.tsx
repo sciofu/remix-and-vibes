@@ -36,33 +36,26 @@ export default function LocationDetail() {
   };
   const location = useLoaderData<Location>();
   return (
-    <div>
-      <h2>{location.name}</h2>
-      <p>Type: {location.type}</p>
-      <p>Dimension: {location.dimension}</p>
-      <p>Created: {location.created}</p>
-      <h3>Residents</h3>
-      <ul
-        style={{ display: "flex", flexWrap: "wrap", gap: "16px", padding: 0 }}
-      >
+    <div className="p-4 h-full overflow-y-auto">
+      <h2 className="text-xl font-bold mb-2">{location.name}</h2>
+      <p className="mb-1">Type: {location.type}</p>
+      <p className="mb-1">Dimension: {location.dimension}</p>
+      <p className="mb-4">Created: {location.created}</p>
+      <h3 className="font-semibold mb-2">Residents</h3>
+      <ul className="flex flex-wrap gap-4 p-0">
         {location.residents.length === 0 ? (
           <li>No residents</li>
         ) : (
           location.residents.map((char) => (
-            <li
-              key={char.id}
-              style={{ listStyle: "none", textAlign: "center" }}
-            >
+            <li key={char.id} className="list-none text-center">
               <Link
                 to={`/characters/${char.id}`}
-                style={{ textDecoration: "none", color: "inherit" }}
+                className="no-underline text-inherit"
               >
                 <img
                   src={char.image}
                   alt={char.name}
-                  width={80}
-                  height={80}
-                  style={{ borderRadius: "50%" }}
+                  className="rounded-full mx-auto mb-2"
                 />
                 <div>{char.name}</div>
               </Link>
