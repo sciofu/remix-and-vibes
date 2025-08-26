@@ -1,4 +1,5 @@
 import {
+  Link,
   Links,
   Meta,
   Outlet,
@@ -17,11 +18,37 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>Hello world!</h1>
+        <LinksNav />
         <Outlet />
 
         <Scripts />
       </body>
     </html>
+  );
+}
+
+function LinksNav() {
+  const navItems = [
+    { to: "/locations", label: "Locations" },
+    { to: "/characters", label: "Characters" },
+    { to: "/episodes", label: "Episodes" },
+  ];
+  return (
+    <>
+      {navItems.map(item => (
+        <Link
+          key={item.to}
+          to={item.to}
+          style={{
+            textDecoration: 'none',
+            fontWeight: 'bold',
+            paddingBottom: 2,
+            marginRight: '2rem',
+          }}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </>
   );
 }
