@@ -6,6 +6,8 @@ import {
   Scripts,
 } from "@remix-run/react";
 
+import "./tailwind.css"
+
 export default function App() {
   return (
     <html>
@@ -45,6 +47,7 @@ function LinksNav() {
             paddingBottom: 2,
             marginRight: '2rem',
           }}
+          className="text-lg"
         >
           {item.label}
         </Link>
