@@ -1,0 +1,34 @@
+{
+  "name": "remix-and-vibes",
+  "version": "1.0.0",
+  "description": "A project used for trying out vibe coding Remix Apps.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./server.js",
+    "start": "cross-env NODE_ENV=production node ./server.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sciofu/remix-and-vibes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sciofu/remix-and-vibes/issues"
+  },
+  "homepage": "https://github.com/sciofu/remix-and-vibes#readme",
+  "dependencies": {
+    "@remix-run/node": "^2.17.0",
+    "@remix-run/react": "^2.17.0",
+    "@remix-run/serve": "^2.17.0",
+    "isbot": "^4.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^2.17.0",
+    "vite": "^6.3.5"
+  }
+}
