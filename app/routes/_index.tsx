@@ -1,20 +1,12 @@
-import type { Route } from "./+types/home";
-import { Link } from "react-router";
+import { Link } from "@remix-run/react";
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
-}
-
-export default function Home() {
+export default function Index() {
   return (
     <main className="container mx-auto p-4 space-y-6">
       <section className="space-y-2">
         <h1 className="text-2xl font-semibold">Remix Concepts Showcase</h1>
         <p className="text-gray-700 dark:text-gray-300">
-          This app demonstrates core Remix/React Router data APIs:
+          This app demonstrates core Remix data APIs:
         </p>
         <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300">
           <li>

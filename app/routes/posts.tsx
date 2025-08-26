@@ -1,12 +1,4 @@
-import type { Route } from "../+types/posts/layout";
-import { Outlet, Link } from "react-router";
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "Posts | Remix Showcase" },
-    { name: "description", content: "Nested routes layout for posts" },
-  ];
-}
+import { Outlet, Link } from "@remix-run/react";
 
 export default function PostsLayout() {
   return (
@@ -23,4 +15,3 @@ export default function PostsLayout() {
     </main>
   );
 }
-

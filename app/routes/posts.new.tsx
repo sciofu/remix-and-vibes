@@ -1,9 +1,9 @@
-import type { Route } from "../+types/posts/new";
-import { Form, useActionData, useNavigation } from "react-router";
+import { type ActionFunctionArgs, json } from "@remix-run/node";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
 
 type ActionData = { error?: string; success?: boolean };
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const newPost = {
     title: String(formData.get("title") || ""),
@@ -12,7 +12,7 @@ export async function action({ request }: Route.ActionArgs) {
   };
 
   if (!newPost.title || !newPost.body) {
-    return { error: "Title and Body are required" } satisfies ActionData;
+    return json<ActionData>({ error: "Title and Body are required" }, { status: 400 });
   }
 
   const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
@@ -22,14 +22,10 @@ export async function action({ request }: Route.ActionArgs) {
   });
 
   if (!res.ok) {
-    return { error: "Failed to create post" } satisfies ActionData;
+    return json<ActionData>({ error: "Failed to create post" }, { status: 500 });
   }
 
-  return { success: true } satisfies ActionData;
-}
-
-export function meta({}: Route.MetaArgs) {
-  return [{ title: "Create Post | Remix Showcase" }];
+  return json<ActionData>({ success: true });
 }
 
 export default function NewPost() {
@@ -62,4 +58,3 @@ export default function NewPost() {
     </section>
   );
 }
-
