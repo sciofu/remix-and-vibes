@@ -19,6 +19,11 @@ const build = viteDevServer
   ? () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
   : await import("./build/server/index.js");
 
+// Silence Chrome DevTools well-known request
+app.get("/.well-known/appspecific/com.chrome.devtools.json", (req, res) => {
+  res.status(404).end();
+});
+
 app.all("*", createRequestHandler({ build }));
 
 app.listen(3000, () => {
