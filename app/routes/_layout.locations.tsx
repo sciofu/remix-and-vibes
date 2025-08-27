@@ -1,5 +1,11 @@
 import { json } from "@remix-run/node";
-import { Outlet, useLoaderData, Link, useFetcher } from "@remix-run/react";
+import {
+  Outlet,
+  useLoaderData,
+  Link,
+  useFetcher,
+  ShouldRevalidateFunctionArgs,
+} from "@remix-run/react";
 import React from "react";
 
 export async function loader({ request }: { request: Request }) {
@@ -66,3 +72,12 @@ export const View = () => {
 };
 
 export default View;
+
+// export function shouldRevalidate({
+//   currentParams,
+//   currentUrl,
+//   formAction,
+// }: ShouldRevalidateFunctionArgs) {
+//   console.log({ currentParams, currentUrl, formAction });
+//   return false;
+// }
