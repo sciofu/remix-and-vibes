@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import { Outlet, useLoaderData, Link, useFetcher } from "@remix-run/react";
+import { Outlet, useLoaderData, Link } from "react-router-dom";
 import React from "react";
 
 export async function loader({ request }: { request: Request }) {
@@ -9,7 +9,7 @@ export async function loader({ request }: { request: Request }) {
     `https://rickandmortyapi.com/api/episode?page=${page}`
   );
   const data = await res.json();
-  return json(data.results);
+  return data.results;
 }
 
 export const View = () => {

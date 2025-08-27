@@ -1,18 +1,17 @@
 import React from "react";
-import { json } from "@remix-run/node";
 import { useLoaderData, useActionData, Form, Link } from "react-router-dom";
 
-export async function action({ request }: { request: Request }) {
+export async function action({ request }) {
   const formData = await request.formData();
   const name = formData.get("newCharacter") as string;
-  return json({ name });
+  return { name };
 }
 
 export async function loader({ params }: { params: { locationId: string } }) {
   const res = await fetch(
     `https://rickandmortyapi.com/api/location/${params.locationId}`
   );
-  if (!res.ok) throw new Response("Not Found", { status: 404 });
+  if (!res.ok) throw new Error("Not Found");
   const location = await res.json();
 
   // Fetch resident character data
@@ -28,7 +27,7 @@ export async function loader({ params }: { params: { locationId: string } }) {
     residents = residents.filter(Boolean);
   }
 
-  return json({ ...location, residents });
+  return { ...location, residents };
 }
 
 export default function LocationDetail() {

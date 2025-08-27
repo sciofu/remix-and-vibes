@@ -1,4 +1,3 @@
-import {
   Link,
   Links,
   Meta,
@@ -10,7 +9,6 @@ import React, { useEffect, useState } from "react";
 
 import "./tailwind.css"
 
-export default function App() {
   return (
     <html>
       <head>
@@ -30,6 +28,38 @@ export default function App() {
   );
 }
 
+
+  const navItems = [
+    { to: "/locations", label: "Locations" },
+    { to: "/characters", label: "Characters" },
+    { to: "/episodes", label: "Episodes" },
+  ];
+  return (
+    <nav className="bg-gray-900 text-white px-8 py-4 flex items-center gap-8 shadow-lg animate-fade-in sticky top-0 z-10">
+      {navItems.map(item => (
+        <Link
+          key={item.to}
+          to={item.to}
+          className="text-lg font-bold pb-1 mr-8 transition-colors duration-300 hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400"
+        >
+          {item.label}
+        </Link>
+      ))}
+    </nav>
+  );
+}
+import { Link, Outlet } from "react-router-dom";
+import React from "react";
+import "./tailwind.css";
+
+export default function App() {
+  return (
+    <div>
+      <LinksNav />
+      <Outlet />
+    </div>
+  );
+}
 
 function LinksNav() {
   const navItems = [

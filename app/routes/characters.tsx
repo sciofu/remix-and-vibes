@@ -1,6 +1,6 @@
 import React from "react";
 import { json, LoaderFunctionArgs } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "react-router-dom";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const res = await fetch("https://rickandmortyapi.com/api/character?page=1");

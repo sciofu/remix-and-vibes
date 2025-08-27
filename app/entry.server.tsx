@@ -1,63 +1,23 @@
 import "./tailwind.css";
-import { PassThrough } from "node:stream";
-
-import type { AppLoadContext, EntryContext } from "@remix-run/node";
-import { createReadableStreamFromReadable } from "@remix-run/node";
-import { RemixServer } from "@remix-run/react";
-import * as isbotModule from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
+import { RouterProvider } from "react-router-dom";
+import { createRouter } from "react-router/server";
+import routes from "./routes";
 
-const ABORT_DELAY = 5_000;
-
-export default function handleRequest(
-  request: Request,
-  responseStatusCode: number,
-  responseHeaders: Headers,
-  remixContext: EntryContext,
-  loadContext: AppLoadContext
-) {
-  let prohibitOutOfOrderStreaming =
-    isBotRequest(request.headers.get("user-agent")) || remixContext.isSpaMode;
-
-  return prohibitOutOfOrderStreaming
-    ? handleBotRequest(
-        request,
-        responseStatusCode,
-        responseHeaders,
-        remixContext
-      )
-    : handleBrowserRequest(
-        request,
-        responseStatusCode,
-        responseHeaders,
-        remixContext
-      );
+export default function handleRequest(request, responseStatusCode, responseHeaders) {
+  const router = createRouter({ routes });
+  return renderToPipeableStream(
+    <RouterProvider router={router} />,
+    {
+      onShellReady() {
+        // Write headers and pipe stream as needed
+      },
+      onError(err) {
+        // Handle error
+      },
+    }
+  );
 }
-
-// We have some Remix apps in the wild already running with isbot@3 so we need
-// to maintain backwards compatibility even though we want new apps to use
-// isbot@4.  That way, we can ship this as a minor Semver update to @remix-run/dev.
-function isBotRequest(userAgent: string | null) {
-  if (!userAgent) {
-    return false;
-  }
-
-  // isbot >= 3.8.0, >4
-  if ("isbot" in isbotModule && typeof isbotModule.isbot === "function") {
-    return isbotModule.isbot(userAgent);
-  }
-
-  // isbot < 3.8.0
-  if ("default" in isbotModule && typeof isbotModule.default === "function") {
-    return isbotModule.default(userAgent);
-  }
-
-  return false;
-}
-
-function handleBotRequest(
-  request: Request,
-  responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
