@@ -6,6 +6,8 @@ import {
   Scripts,
 } from "@remix-run/react";
 
+import React, { useEffect, useState } from "react";
+
 import "./tailwind.css"
 
 export default function App() {
@@ -22,12 +24,12 @@ export default function App() {
       <body>
         <LinksNav />
         <Outlet />
-
         <Scripts />
       </body>
     </html>
   );
 }
+
 
 function LinksNav() {
   const navItems = [

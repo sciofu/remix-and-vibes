@@ -16,7 +16,7 @@ export default function Characters() {
   }, [characters]);
 
   return (
-    <div className="p-6">
+    <div className="p-6 animate-fade-in-up">
       <h1 className="text-2xl font-bold mb-4">Characters</h1>
       <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {loading

@@ -30,7 +30,7 @@ export const View = () => {
   };
 
   return (
-    <div className="flex h-[95.5vh]">
+    <div className="flex h-[95.5vh] animate-fade-in-up">
       <aside className="w-[450px] border-r border-gray-300 p-4 box-border flex flex-col bg-white shadow-lg transition-all duration-500 ease-in-out">
         <h2 className="text-lg font-bold mb-4">Episodes</h2>
         <ul className="list-none p-0 flex-1 overflow-y-auto m-0">
